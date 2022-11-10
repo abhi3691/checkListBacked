@@ -4,7 +4,7 @@ const CheckShema = require("./Model/CheckShema");
 
 const CheckedModel = mongoose.model("checkedList", CheckShema);
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 app.use(express.json());
 
 mongoose.connect("mongodb://localhost:27017/checkList", {
