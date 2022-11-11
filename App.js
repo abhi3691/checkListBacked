@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const CheckShema = require("./Model/CheckShema");
 
@@ -6,6 +7,7 @@ const CheckedModel = mongoose.model("checkedList", CheckShema);
 const app = express();
 const port = process.env.PORT || 8000;
 app.use(express.json());
+app.use(cors());
 
 mongoose.connect("mongodb://localhost:27017/checkList", {
   useNewUrlParser: true,
@@ -13,6 +15,10 @@ mongoose.connect("mongodb://localhost:27017/checkList", {
 
 mongoose.connection.on("connected", () => {
   console.log("connected to MogoDb");
+});
+
+app.get("/", async (req, res) => {
+  res.send("Welcome");
 });
 
 app.get("/getCheckList", async (req, res) => {
